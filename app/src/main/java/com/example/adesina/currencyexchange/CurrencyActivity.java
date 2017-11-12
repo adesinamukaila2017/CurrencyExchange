@@ -29,9 +29,9 @@ public class CurrencyActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        final String userName = intent.getStringExtra(CurrencyAdapter.KEY_NAME);
-        String image = intent.getStringExtra(CurrencyAdapter.KEY_IMAGE);
-        final String profileUrl = intent.getStringExtra(CurrencyAdapter.KEY_URL);
+        final String userName = intent.getStringExtra(CurrencyAdapter.KEY_CURRENCY);
+        String image = intent.getStringExtra(CurrencyAdapter.KEY_BTC);
+        final String profileUrl = intent.getStringExtra(CurrencyAdapter.KEY_ETH);
 
 
         Picasso.with(this)

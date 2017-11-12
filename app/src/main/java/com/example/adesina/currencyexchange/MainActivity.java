@@ -12,6 +12,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -20,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -54,21 +56,30 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, requestUrl, null,
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, requestUrl,  null,
 
         //StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URL_DATA, new Response.Listener<String>() {
+                URL_DATA, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(JSONObject response) {
 
                 progressDialog.dismiss();
-
                 try {
 
-                    JSONObject jsonObject = new JSONObject(response);
+                    JSONObject btc_rates = response.getJSONObject("BTC".trim());
 
+                    JSONObject eth_rates = response.getJSONObject("ETH".trim());
 
-                        developersLists.add(developers);
+                    Iterator<?> keysBTC = btc_rates.keys();
+                    Iterator<?> keysETH = eth_rates.keys();
+
+                    while (keysBTC.hasNext() && keysETH.hasNext()) {
+                        String keyBTC = (String) keysBTC.next();
+                        String keyETH = (String) keysETH.next();
+
+                        CurrencyList developers = new CurrencyList(keyBTC, btc_rates.getDouble(keyBTC), eth_rates.getDouble(keyETH));
+
+                       developersLists.add(developers);
 
                     }
 

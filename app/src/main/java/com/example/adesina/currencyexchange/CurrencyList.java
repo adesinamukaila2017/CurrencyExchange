@@ -7,32 +7,29 @@ package com.example.adesina.currencyexchange;
 public class CurrencyList {
 
     private String currency;
-    private String btc;
-    private String eth;
-    private String rate;
+    private Double btc;
+    private Double eth;
+
 
     public String getCurrency() {
         return currency;
     }
 
-    public String getBTC() {
+    public Double getBTC() {
         return btc;
     }
 
-    public String getEth() {
+    public Double getEth() {
         return eth;
     }
 
-    public String getRate() {
-        return rate;
-    }
 
 
-    public CurrencyList(String currency, String btc, String eth, String rate) {
+    public CurrencyList(String currency, Double btc, Double eth) {
         this.currency = currency;
         this.btc = btc;
         this.eth = eth;
-        this.rate = rate;
+
 
     }
 

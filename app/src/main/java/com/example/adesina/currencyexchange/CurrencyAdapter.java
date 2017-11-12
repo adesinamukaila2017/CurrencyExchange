@@ -10,11 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -25,9 +22,9 @@ import java.util.List;
 public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHolder> {
 
 
-    public static final String KEY_NAME = "name";
-    public static final String KEY_IMAGE = "image";
-    public static final String KEY_URL = "url";
+    public static final String KEY_CURRENCY = "currency";
+    public static final String KEY_BTC = "btc";
+    public static final String KEY_ETH = "eth";
 
     private List<CurrencyList> developersLists;
     private Context context;
@@ -52,11 +49,9 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         final CurrencyList currencyList = developersLists.get(position);
-        holder.login.setText(currencyList.getLogin());
+        holder.btc.setText(currencyList.getCurrency());
 
-        Picasso.with(context)
-                .load(currencyList.getAvatar_url())
-                .into(holder.avatar_url);
+
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,9 +60,9 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHo
                 CurrencyList currencyList1 = developersLists.get(position);
 
                 Intent skipIntent = new Intent(v.getContext(), CurrencyActivity.class);
-                skipIntent.putExtra(KEY_NAME, currencyList1.getLogin());
-                skipIntent.putExtra(KEY_URL, currencyList1.getHtml_url());
-                skipIntent.putExtra(KEY_IMAGE, currencyList1.getAvatar_url());
+                skipIntent.putExtra(KEY_CURRENCY, currencyList1.getCurrency());
+                skipIntent.putExtra(KEY_BTC, currencyList1.getBTC());
+                skipIntent.putExtra(KEY_ETH, currencyList1.getEth());
                 v.getContext().startActivity(skipIntent);
             }
         });
@@ -81,17 +76,17 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder  {
 
-        public TextView login;
-        public ImageView avatar_url;
-        public TextView html_url;
+        public TextView currency;
+        public TextView btc;
+        public TextView eth;
         public LinearLayout linearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            login = (TextView) itemView.findViewById(R.id.username);
-            avatar_url = (ImageView) itemView.findViewById(R.id.imageView);
-            html_url = (TextView) itemView.findViewById(R.id.htmUrl);
+            currency = (TextView) itemView.findViewById(R.id.currency);
+            btc = (TextView) itemView.findViewById(R.id.btc);
+            eth = (TextView) itemView.findViewById(R.id.eth);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
         }
 
